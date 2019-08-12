@@ -37,15 +37,13 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-Once the extension is installed, simply inherit any widgets from  
-pozitronik\widgets\CachedWidget
-class instead of yii\base\Widget in your code.
+Once the extension is installed, simply inherit any widgets from `pozitronik\widgets\CachedWidget` class instead of `yii\base\Widget` in your code.
 
 Example
 -------
 
 ```php
- class MyWidget extends  \pozitronik\widgets\CachedWidget {
+ class MyWidget extends \pozitronik\widgets\CachedWidget {
  // it is all, mostly
  }
  ```
