@@ -1,4 +1,4 @@
-CachedWidgets
+CachedWidget
 ===========================
 Caching support for Yii2 widgets
 
@@ -38,6 +38,11 @@ Usage
 -----
 
 Once the extension is installed, simply inherit any widgets from `pozitronik\widgets\CachedWidget` class instead of `yii\base\Widget` in your code.
+
+CachedWidget has redefined `render()` method, that stores all rendered views in Yii2 global cache (with nested widgets, if its called in view file).
+
+Widget handles correctly Yii2 view assets and inline resorces, like js/css files or inline code inclusion.
+
 
 Example
 -------
