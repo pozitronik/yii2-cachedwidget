@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace pozitronik\widgets;
 
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\base\Widget;
 use yii\caching\Dependency;
@@ -16,6 +17,7 @@ use yii\caching\Dependency;
  * @property null|Dependency $dependency dependency of the cached item. If the dependency changes,
  * the corresponding value in the cache will be invalidated when it is fetched via [[get()]].
  * @property-read null|bool $isResultFromCache Is rendering result retrieved from cache (null if not rendered yet)
+ * @property-write callable|string $cacheNamePrefix Key prefix, that can be set in descendent class
  *
  * @example Usage example:
  * ```php
@@ -28,19 +30,24 @@ class CachedWidget extends Widget {
 	private $_isResultFromCache;
 	private $_duration;
 	private $_dependency;
+	private $_cacheNamePrefix = '';
 	/** @var CachedResources|null $resources */
 	private $resources;
 
 	public function init() {
 		parent::init();
 		$this->resources = new CachedResources();
+
+		if (is_callable($this->_cacheNamePrefix)) {
+			$this->_cacheNamePrefix = call_user_func($this->_cacheNamePrefix, get_called_class());
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function render($view, $params = []):string {
-		$cacheName = self::class.$view.sha1(json_encode($params, JSON_PARTIAL_OUTPUT_ON_ERROR));//unique enough
+		$cacheName = $this->_cacheNamePrefix.self::class.$view.sha1(json_encode($params, JSON_PARTIAL_OUTPUT_ON_ERROR));//unique enough
 		if (true === $this->_isResultFromCache = Yii::$app->cache->exists($cacheName)) {//rendering result retrieved from cache => register linked resources
 			$this->resources->attributes = Yii::$app->cache->get($cacheName."resources");
 
@@ -129,5 +136,12 @@ class CachedWidget extends Widget {
 	 */
 	public function getIsResultFromCache():?bool {
 		return $this->_isResultFromCache;
+	}
+
+	/**
+	 * @param string|callable $cacheName
+	 */
+	public function setCacheNamePrefix($cacheNamePrefix):void {
+		$this->_cacheNamePrefix = $cacheNamePrefix;
 	}
 }
