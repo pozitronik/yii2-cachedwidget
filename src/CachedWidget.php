@@ -18,7 +18,7 @@ use yii\caching\Dependency;
  * the corresponding value in the cache will be invalidated when it is fetched via [[get()]].
  * @property-read null|bool $isResultFromCache Is rendering result retrieved from cache (null if not rendered yet)
  * @property-write callable|string $cacheNamePrefix Key prefix, that can be set in descendent class
- *
+ * @property bool $disable If true, act like regular widget (disable caching). Option enabled by default on YII_ENV_DEV configurations.
  * @example Usage example:
  * ```php
  * class MyWidget extends CachedWidget {
@@ -33,6 +33,7 @@ class CachedWidget extends Widget {
 	private $_cacheNamePrefix = '';
 	/** @var CachedResources|null $resources */
 	private $resources;
+	private $_disable = YII_ENV_DEV;
 
 	public function init() {
 		parent::init();
@@ -47,6 +48,9 @@ class CachedWidget extends Widget {
 	 * {@inheritDoc}
 	 */
 	public function render($view, $params = []):string {
+
+		if ($this->_disable) return $this->getView()->render($view, $params, $this);
+
 		$cacheName = $this->_cacheNamePrefix.self::class.$view.sha1(json_encode($params, JSON_PARTIAL_OUTPUT_ON_ERROR));//unique enough
 		if (true === $this->_isResultFromCache = Yii::$app->cache->exists($cacheName)) {//rendering result retrieved from cache => register linked resources
 			$this->resources->attributes = Yii::$app->cache->get($cacheName."resources");
@@ -143,5 +147,19 @@ class CachedWidget extends Widget {
 	 */
 	public function setCacheNamePrefix($cacheNamePrefix):void {
 		$this->_cacheNamePrefix = $cacheNamePrefix;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getDisable():bool {
+		return $this->_disable;
+	}
+
+	/**
+	 * @param bool $disable
+	 */
+	public function setDisable(bool $disable):void {
+		$this->_disable = $disable;
 	}
 }
