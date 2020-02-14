@@ -41,7 +41,7 @@ Once the extension is installed, simply inherit any widgets from `pozitronik\wid
 
 CachedWidget has redefined `render()` method, that stores all rendered views in Yii2 global cache (with nested widgets, if its called in view file).
 
-Widget handles correctly Yii2 view assets and inline resorces, like js/css files or inline code inclusion.
+Widget handles correctly Yii2 view assets and inline resources, like js/css files or inline code inclusion.
 
 
 Example
