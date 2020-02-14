@@ -4,8 +4,6 @@ declare(strict_types = 1);
 namespace pozitronik\widgets;
 
 use Yii;
-use yii\base\InvalidConfigException;
-use yii\base\Model;
 use yii\base\Widget;
 use yii\caching\Dependency;
 
@@ -40,7 +38,7 @@ class CachedWidget extends Widget {
 		$this->resources = new CachedResources();
 
 		if (is_callable($this->_cacheNamePrefix)) {
-			$this->_cacheNamePrefix = call_user_func($this->_cacheNamePrefix, get_called_class());
+			$this->_cacheNamePrefix = call_user_func($this->_cacheNamePrefix, static::class);
 		}
 	}
 
@@ -143,7 +141,7 @@ class CachedWidget extends Widget {
 	}
 
 	/**
-	 * @param string|callable $cacheName
+	 * @param string|callable $cacheNamePrefix
 	 */
 	public function setCacheNamePrefix($cacheNamePrefix):void {
 		$this->_cacheNamePrefix = $cacheNamePrefix;
