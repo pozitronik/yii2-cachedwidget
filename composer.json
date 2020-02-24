@@ -15,6 +15,7 @@
 			"email": "antikillerxxl@gmail.com"
 		}
 	],
+	"minimum-stability": "dev",
 	"autoload": {
 		"psr-4": {
 			"pozitronik\\widgets\\": "src"
