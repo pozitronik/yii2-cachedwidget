@@ -31,6 +31,7 @@ CachedWidget has redefined `render()` method, that stores all rendered views in 
 
 Widget handles correctly Yii2 view assets and inline resources, like js/css files or inline code inclusion.
 
+Caching is **disabled** by default within YII_ENV_DEV environment (see $disable property).
 
 Example
 -------
