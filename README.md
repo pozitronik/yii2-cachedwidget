@@ -1,5 +1,5 @@
 CachedWidget
-===========================
+============
 Caching support for Yii2 widgets
 
 Installation
@@ -7,28 +7,16 @@ Installation
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-
-Add
-
-```
-{
-	"type": "vcs",
-	"url": "https://github.com/pozitronik/yii2-cachedwidget"
-} 
-```
-
-to the repositories section of your `composer.json` file.
-
-Either run
+Run
 
 ```
-php composer.phar require --prefer-dist pozitronik/yii2-cachedwidget "*"
+php composer.phar require pozitronik/yii2-cachedwidget "dev-master"
 ```
 
 or add
 
 ```
-"pozitronik/yii2-cachedwidget": "*"
+"pozitronik/yii2-cachedwidget": "dev-master"
 ```
 
 to the require section of your `composer.json` file.
