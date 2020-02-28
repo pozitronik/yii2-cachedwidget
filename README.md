@@ -22,6 +22,12 @@ or add
 to the require section of your `composer.json` file.
 
 
+Requirements
+------------
+
+Yii2,
+PHP >= 7.2.0
+
 Usage
 -----
 
