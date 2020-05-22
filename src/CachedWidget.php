@@ -34,7 +34,7 @@ class CachedWidget extends Widget {
 	private $resources;
 	private $_disable = YII_ENV_DEV;
 
-	public function init() {
+	public function init():void {
 		parent::init();
 		$this->resources = new CachedResources();
 
