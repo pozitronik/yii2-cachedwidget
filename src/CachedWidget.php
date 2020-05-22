@@ -25,9 +25,10 @@ use yii\caching\Dependency;
  * ```
  */
 class CachedWidget extends Widget {
+	protected $_duration;
+	protected $_dependency;
+
 	private $_isResultFromCache;
-	private $_duration;
-	private $_dependency;
 	private $_cacheNamePrefix = '';
 	/** @var CachedResources|null $resources */
 	private $resources;
