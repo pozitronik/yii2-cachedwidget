@@ -50,7 +50,7 @@ class CachedWidget extends Widget {
 
 		if ($this->_disable) return $this->getView()->render($view, $params, $this);
 
-		$cacheName = $this->_cacheNamePrefix.self::class.$view.sha1(json_encode($params, JSON_PARTIAL_OUTPUT_ON_ERROR));//unique enough
+		$cacheName = $this->_cacheNamePrefix.self::class.$view.sha1(json_encode(print_r($params, true), JSON_PARTIAL_OUTPUT_ON_ERROR));//unique enough
 		if (true === $this->_isResultFromCache = Yii::$app->cache->exists($cacheName)) {//rendering result retrieved from cache => register linked resources
 			$this->resources->attributes = Yii::$app->cache->get($cacheName."resources");
 
