@@ -44,13 +44,23 @@ class CachedWidget extends Widget {
 	}
 
 	/**
+	 * @param null $mixed
+	 * @return false|string
+	 */
+	private static function var_dump_ret($mixed = null):string {
+		ob_start();
+		var_dump($mixed);
+		return ob_get_clean();
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	public function render($view, $params = []):string {
 
 		if ($this->_disable) return $this->getView()->render($view, $params, $this);
 
-		$cacheName = $this->_cacheNamePrefix.self::class.$view.sha1(json_encode(print_r($params, true), JSON_PARTIAL_OUTPUT_ON_ERROR));//unique enough
+		$cacheName = $this->_cacheNamePrefix.self::class.$view.sha1(self::var_dump_ret($params));//unique enough
 		if (true === $this->_isResultFromCache = Yii::$app->cache->exists($cacheName)) {//rendering result retrieved from cache => register linked resources
 			$this->resources->attributes = Yii::$app->cache->get($cacheName."resources");
 
