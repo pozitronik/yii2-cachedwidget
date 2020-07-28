@@ -6,6 +6,7 @@ namespace pozitronik\widgets;
 use Yii;
 use yii\base\Widget;
 use yii\caching\Dependency;
+use function array_diff_key;
 
 /**
  * Class CachedWidget
@@ -116,17 +117,23 @@ class CachedWidget extends Widget {
 
 		return Yii::$app->cache->getOrSet($cacheName, function() use ($view, $params, $cacheName) {
 			$this->_isResultFromCache = false;
+			$currentlyRegisteredMetaTags = $this->getView()->metaTags;
+			$currentlyRegisteredLinkTags = $this->getView()->linkTags;
+			$currentlyRegisteredCss = $this->getView()->css;
+			$currentlyRegisteredCssFiles = $this->getView()->cssFiles;
+			$currentlyRegisteredJs = $this->getView()->js;
+			$currentlyRegisteredJsFiles = $this->getView()->jsFiles;
 			$currentlyRegisteredAssets = Yii::$app->assetManager->bundles;
 
 			$renderResult = $this->getView()->render($view, $params, $this);
 
 			Yii::$app->cache->set($cacheName."resources", [
-				'metaTags' => $this->getView()->metaTags,
-				'linkTags' => $this->getView()->linkTags,
-				'css' => $this->getView()->css,
-				'cssFiles' => $this->getView()->cssFiles,
-				'js' => $this->getView()->js,
-				'jsFiles' => $this->getView()->jsFiles,
+				'metaTags' => array_diff_key($this->getView()->metaTags, $currentlyRegisteredMetaTags),
+				'linkTags' => array_diff_key($this->getView()->linkTags, $currentlyRegisteredLinkTags),
+				'css' => array_diff_key($this->getView()->css, $currentlyRegisteredCss),
+				'cssFiles' => array_diff_key($this->getView()->cssFiles, $currentlyRegisteredCssFiles),
+				'js' => array_diff_key($this->getView()->js, $currentlyRegisteredJs),
+				'jsFiles' => array_diff_key($this->getView()->jsFiles, $currentlyRegisteredJsFiles),
 				'assetBundles' => array_diff_key(Yii::$app->assetManager->bundles, $currentlyRegisteredAssets)
 			], $this->_duration, $this->_dependency);//remember all included resources
 			return $renderResult;
