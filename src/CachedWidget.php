@@ -6,7 +6,6 @@ namespace pozitronik\widgets;
 use Yii;
 use yii\base\Widget;
 use yii\caching\Dependency;
-use function array_diff_key;
 
 /**
  * Class CachedWidget
