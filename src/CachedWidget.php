@@ -50,7 +50,7 @@ class CachedWidget extends Widget {
 	 * @param null $mixed
 	 * @return false|string
 	 */
-	private static function var_dump_ret($mixed = null):string {
+	protected static function var_dump_ret($mixed = null):string {
 		ob_start();
 		var_dump($mixed);
 		return ob_get_clean();
