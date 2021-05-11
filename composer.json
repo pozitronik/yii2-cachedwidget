@@ -15,13 +15,25 @@
 			"email": "antikillerxxl@gmail.com"
 		}
 	],
+	"config": {
+		"process-timeout": 1800,
+		"fxp-asset": {
+			"enabled": false
+		}
+	},
+	"minimum-stability": "stable",
 	"require-dev": {
 		"yiisoft/yii2": "dev-master"
 	},
-	"minimum-stability": "dev",
 	"autoload": {
 		"psr-4": {
 			"pozitronik\\widgets\\": "src"
 		}
-	}
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://asset-packagist.org"
+		}
+	]
 }
