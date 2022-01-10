@@ -48,12 +48,15 @@ class CachedWidget extends Widget {
 
 	/**
 	 * @param null $mixed
-	 * @return false|string
+	 * @return string
 	 */
 	protected static function var_dump_ret($mixed = null):string {
-		ob_start();
-		var_dump($mixed);
-		return ob_get_clean();
+		if (ob_start()) {
+			/** @noinspection ForgottenDebugOutputInspection Это точно не отладка */
+			var_dump($mixed);
+			return ob_get_clean();
+		}
+		return '';
 	}
 
 	/**
