@@ -18,13 +18,13 @@ use yii\base\Model;
  * @property array $cssFiles
  */
 class CachedResources extends Model {
-	private $_metaTags = [];
-	private $_linkTags = [];
-	private $_css = [];
-	private $_cssFiles = [];
-	private $_js = [];
-	private $_jsFiles = [];
-	private $_assetBundles = [];
+	private array $_metaTags = [];
+	private array $_linkTags = [];
+	private array $_css = [];
+	private array $_cssFiles = [];
+	private array $_js = [];
+	private array $_jsFiles = [];
+	private array $_assetBundles = [];
 
 	/**
 	 * {@inheritDoc}
@@ -45,7 +45,7 @@ class CachedResources extends Model {
 	/**
 	 * @param array $metaTags
 	 */
-	public function setMetaTags($metaTags):void {
+	public function setMetaTags(array $metaTags):void {
 		$this->_metaTags = $metaTags;
 	}
 
@@ -59,7 +59,7 @@ class CachedResources extends Model {
 	/**
 	 * @param array $linkTags
 	 */
-	public function setLinkTags($linkTags):void {
+	public function setLinkTags(array $linkTags):void {
 		$this->_linkTags = $linkTags;
 	}
 
@@ -73,7 +73,7 @@ class CachedResources extends Model {
 	/**
 	 * @param array $css
 	 */
-	public function setCss($css):void {
+	public function setCss(array $css):void {
 		$this->_css = $css;
 	}
 
@@ -87,7 +87,7 @@ class CachedResources extends Model {
 	/**
 	 * @param array $cssFiles
 	 */
-	public function setCssFiles($cssFiles):void {
+	public function setCssFiles(array $cssFiles):void {
 		$this->_cssFiles = $cssFiles;
 	}
 
@@ -101,7 +101,7 @@ class CachedResources extends Model {
 	/**
 	 * @param array $js
 	 */
-	public function setJs($js):void {
+	public function setJs(array $js):void {
 		$this->_js = $js;
 	}
 
@@ -115,7 +115,7 @@ class CachedResources extends Model {
 	/**
 	 * @param array $jsFiles
 	 */
-	public function setJsFiles($jsFiles):void {
+	public function setJsFiles(array $jsFiles):void {
 		$this->_jsFiles = $jsFiles;
 	}
 
@@ -129,7 +129,7 @@ class CachedResources extends Model {
 	/**
 	 * @param array $assetBundles
 	 */
-	public function setAssetBundles($assetBundles):void {
+	public function setAssetBundles(array $assetBundles):void {
 		$this->_assetBundles = $assetBundles;
 	}
 }
