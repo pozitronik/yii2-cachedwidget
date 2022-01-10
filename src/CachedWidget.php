@@ -35,7 +35,6 @@ class CachedWidget extends Widget {
 	 */
 	private mixed $_cacheNamePrefix = '';
 	private null|string  $_cacheUniqueId;
-	/** @var CachedResources|null $resources */
 	private null|CachedResources $resources;
 	private bool $_disable = false;
 
