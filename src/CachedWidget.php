@@ -109,7 +109,7 @@ class CachedWidget extends Widget {
 				$this->getView()->registerJsFile($jsFile, ['position' => $position]);
 			}
 
-			foreach ($this->resources->assetBundles as $key => $bundle) {
+			foreach ($this->resources->assetBundles as $bundle) {
 				$this->getView()->assetBundles[] = $bundle;
 			}
 		}
