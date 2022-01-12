@@ -26,16 +26,16 @@ use yii\caching\Dependency;
  * ```
  */
 class CachedWidget extends Widget {
-	protected null|int $_duration;
+	protected ?int $_duration = null;
 	protected null|Dependency $_dependency = null;
 
-	private bool $_isResultFromCache;
+	private ?bool $_isResultFromCache = null;
 	/**
 	 * @var callable|string
 	 */
 	private mixed $_cacheNamePrefix = '';
-	private null|string  $_cacheUniqueId;
-	private null|CachedResources $resources;
+	private ?string $_cacheUniqueId = null;
+	private ?CachedResources $resources = null;
 	private bool $_disable = false;
 
 	/**
